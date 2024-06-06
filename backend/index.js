@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+//GET ALL USERS
 app.get('/api/users',(req,res)=>{
     const q= 'SELECT * FROM users';
     db.query(q,(err,data)=>{
@@ -26,6 +27,7 @@ app.get('/api/users',(req,res)=>{
     })
 })
 
+//CREATE USER
 app.post('/api/users',(req,res)=>{
     const q = 'INSERT INTO users (username,email,password) VALUES (?)'
     const values=[
@@ -38,6 +40,15 @@ app.post('/api/users',(req,res)=>{
         return res.json("User registered");
     })
     // res.json(req.body);
+})
+
+//DELETE USER
+app.delete("/api/:id",(req,res)=>{
+    const q = 'DELETE FROM users WHERE id = ?'
+    db.query(q,[req.params.id],(err,data)=>{
+        if(err) return res.json(err);
+        return res.json("User deleted");
+    })
 })
 
 app.listen(port, () => {
