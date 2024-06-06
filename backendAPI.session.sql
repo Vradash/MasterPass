@@ -6,4 +6,13 @@ CREATE TABLE `test`.`users` (
   PRIMARY KEY (`id`),
 );
 
-INSERT INTO `test`.`users`(`username`,`email`,`password`) VALUES('Vikram','asdf','qwer')
+INSERT INTO `test`.`users`(`username`,`email`,`password`) VALUES('Vikram','asdf','qwer');
+
+CREATE TABLE  `test`.`passwords` (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  password VARCHAR(45) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
